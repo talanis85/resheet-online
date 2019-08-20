@@ -1,0 +1,47 @@
+-- Resheet-Tutorial
+-------------------
+
+-- Zeilen, die mit "--" beginnen, sind Kommentare und werden ignoriert
+
+-- Jedes Sheet beginnt mit einem Kopfteil, bestehend aus Titel, Autor und Skalierung.
+-- Alle 3 Felder muessen vorhanden sein und die Reihenfolge ist bindend.
+
+title Resheet-Tutorial
+composer Public Domain
+size 18
+
+-- Ab hier beginnt die Musik. Wir setzen erstmal die Takt- und Tonart:
+
+time 4/4
+key D
+
+-- Wie bei Leadsheets ueblich, dreht sich alles um Akkorde. Jeder Akkord
+-- besteht aus folgenden Elementen:
+-- 1. Notenwert
+--   "1" fuer eine ganze Note, "2" fuer eine halbe und "4." fuer eine punktierte Viertelnote
+-- 2. Akkordsymbol
+--   Beispiele: C, Ebm, Am7b5, Ddim, F#7
+-- 3. (optional) Voicing
+--   Standardmaessig wird einfach der Notenwert in Rhythmusnotation ausgegeben.
+
+-- Ein Beispiel fuer einen Akkord waere also:
+-- 2            Am7b5
+-- |            |                  |
+-- Halbe Note   A halbvermindert   Kein vorgegebenes Voicing
+
+-- Wir schreiben mal ein kleines II-V-I Intro:
+
+1 Em7 | 2 A7 2 Dmaj7 | 1 Em7 | 2 A7 2 Dmaj7 \\
+
+-- Das "\\" am Ende ist ein Zeilenumbruch. Umbrueche finden irgendwann auch automatisch
+-- statt, das sieht aber meistens nicht sehr schoen aus, also machen wir sie am besten
+-- von Hand.
+
+-- Als naechstes eine 8-taktige Strophe. Die Syntax <Text> gibt einer Passage einen Namen.
+-- Man beachte die Wiederholungszeichen.
+
+<Strophe>
+|:
+1 Bm | 1 Gmaj7 | 1 A7 | 1 Bm \\
+1 C#m7b5 | 1 Dmaj7 | 1 Em7 | 1 A7 \\
+:|
