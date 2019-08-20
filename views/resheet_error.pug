@@ -7,3 +7,7 @@ html
       div(class="alert alert-danger" role="alert")
         strong Fehler
         pre= error
+      pre
+        code= preCode
+        div(class="alert alert-danger")= offendingLine
+        code= postCode

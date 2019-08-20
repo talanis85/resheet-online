@@ -92,7 +92,27 @@ app.post('/render', function (req, res) {
         procLilypond.stdin.write(stdoutResheet)
         procLilypond.stdin.end()
       } else {
-        res.render('resheet_error', { error: stderrResheet })
+        const match = stderrResheet.match(/line (?<line>\d+), column (?<column>\d+)/)
+        if (match == null) {
+          res.render('unknown_error', {
+            error: stderrResheet
+          })
+        } else {
+          const lineNumber = parseInt(match.groups.line)
+          const columnNumber = parseInt(match.groups.column)
+          const lines = data.split('\n')
+          const preCode = lines.slice(0, lineNumber-1).join('\n')
+          const offendingLine = lines[lineNumber-1]
+          const postCode = lines.slice(lineNumber+1).join('\n')
+          res.render('resheet_error', {
+            line: lineNumber,
+            column: columnNumber,
+            preCode: preCode,
+            offendingLine: offendingLine,
+            postCode: postCode,
+            error: stderrResheet
+          })
+        }
       }
     })
 
