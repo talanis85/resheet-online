@@ -3,17 +3,25 @@ html
     title ReSheet
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous')
     script(src='/static/index.js')
+    script(src="//mozilla.github.io/pdf.js/build/pdf.js")
   body
     div(class="container")
       h1 ReSheet editor
       p
         a(href='/00e87b61c00db4dd07c3146bbdcf5a609a969ceb22145b27bf94ab0637797629') Zum Tutorial
-      form(target='_blank', action='/render', method='post')
-        div(class='form-group')
-          button(type='button', class='btn btn-default', onclick='javascript:saveSheet()') Speichern
-          input(class='btn btn-default', type='submit', value='Rendern')
-        div(class='form-group')
-          textarea(id='data', class='form-control', name='data', style='height: 500px; font-family: monospace;')= data
+      form(action="/render" method="POST")
+        div(class="row")
+          div(class="col-md-6")
+            div(class='form-group')
+              button(type='button', class='btn btn-default', onclick='javascript:saveSheet()') Online speichern
+            div(class='form-group')
+              textarea(id='data', class='form-control', name='data', style='height: 500px; font-family: monospace;')= data
+          div(class="col-md-6")
+            div(class='form-group')
+              button(class='btn btn-primary', type='button', onclick='javascript:renderSheet()') Vorschau aktualisieren
+              input(class='btn btn-default', type='submit', value="Download PDF")
+            div(class='form-group')
+              canvas(id="preview")
     footer(class='footer')
       div(class='container')
         p(class='text-muted') ReSheet v0.1.1 &mdash; &copy; 2019 Philip Kranz &mdash; <a href="https://github.com/talanis85/resheet">GitHub</a>

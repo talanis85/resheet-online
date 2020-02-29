@@ -6,7 +6,7 @@ const fs = require('fs')
 const app = express()
 const port = 3000
 
-const config = require("./config.js")
+const config = require("./config.js").config
 
 try {
   fs.mkdirSync('rendered')
@@ -44,6 +44,16 @@ app.post('/save', function (req, res) {
   const filename = crypto.createHash('sha256').update(data).digest('hex')
 
   fs.writeFileSync(process.cwd() + "/sheets/" + filename, data)
+
+  res.set('Content-Type', 'application/json')
+  res.send({
+    hash: filename
+  })
+})
+
+app.post('/hash', function (req, res) {
+  const data = req.body.data.replace(/\r\n/g, "\n")
+  const filename = crypto.createHash('sha256').update(data).digest('hex')
 
   res.set('Content-Type', 'application/json')
   res.send({
