@@ -6,6 +6,8 @@ const fs = require('fs')
 const app = express()
 const port = 3000
 
+const config = require("./config.js")
+
 try {
   fs.mkdirSync('rendered')
 } catch (e) {
@@ -61,7 +63,7 @@ app.post('/render', function (req, res) {
     console.debug(`${fullname}.pdf not found. Trying to build it.`)
 
     console.debug("Running resheet")
-    const procResheet = child_process.exec('resheet')
+    const procResheet = child_process.exec(config.resheet)
 
     var stderrResheet = ""
     var stdoutResheet = ""
@@ -72,7 +74,7 @@ app.post('/render', function (req, res) {
       console.debug("Resheet completed")
       if (code == 0) {
         console.debug("Running lilypond")
-        const procLilypond = child_process.exec(`lilypond -o "rendered/${filename}" -`)
+        const procLilypond = child_process.exec(`${config.lilypond} -o "rendered/${filename}" -`)
 
         var stderrLilypond = ""
         var stdoutLilypond = ""
